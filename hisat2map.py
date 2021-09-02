@@ -3,6 +3,7 @@ from multiprocessing import Pool
 import glob
 import subprocess
 import pprint
+import time
 
 def something(args):
     ref, species = args
@@ -11,6 +12,7 @@ def something(args):
 
 #data = subprocess.check_output('ls -al', shell = True)
 if __name__ == '__main__':
+    start = time.time()  # 시작 시간 저장
     pool = Pool(10)
 
     path = '1.NCBI//*.fa' # fasta file path
@@ -28,3 +30,5 @@ if __name__ == '__main__':
 
     args = zip(fasta, base_ref) #zip [(fasta path, basename), (), (), ...]
     pool.map(something, args)  # function and args
+    print("time :", time.time() - start)  # 현재시각 - 시작시간 = 실행 시간
+    
