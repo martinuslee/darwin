@@ -1,8 +1,6 @@
 import os
 from multiprocessing import Pool
 import glob
-import subprocess
-import pprint
 import time
 
 def something(args):
