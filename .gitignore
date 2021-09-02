@@ -1,3 +1,5 @@
 *.fa
 *.ht2
 *.sa
+*.gz
+*.fastq
