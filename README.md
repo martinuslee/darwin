@@ -3,21 +3,37 @@
 ## discription
 
 ```
-pip install glob2
-pip install figlet
+$ pip install glob2
+$ pip install figlet
 ```
 
 ## Build Reference File 
 
 - hisat2ref.py
 
+```
+$ python3 hisat2ref.py -t 4 -p 1.NCBI/ -o 2.HISAT2REF/
+$ python3 hisat2ref.py -h
+usage: hisat2ref.py [-h] [-t THREAD] [-p PATH] [-o OUTDIR]
+
+HISAT2 INDEXING NCBI ENTIRE SPECIES SCRIPT
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -t THREAD, --thread THREAD
+                        Launch NTHREADS parallel build threads
+  -p PATH, --path PATH  Directory path NCBI Refernce fasta files stored
+  -o OUTDIR, --outdIr OUTDIR
+                        HISAT2 Output Directory path
+```
+
 ## Sample file mapping
 
 - hisat2map.py
 
 ```
-python3 hisat2map.py -t 4 --per sampled10% #example
-python3 hisat2map.py -h
+$ python3 hisat2map.py -t 4 --per sampled10% #example
+$ python3 hisat2map.py -h
 
 usage: hisat2map.py [-h] [-t THREAD] [-i INDEX_PATH] [-s SAMPLE_PATH] [--per SAMPLE_RATE] [--version]
 
