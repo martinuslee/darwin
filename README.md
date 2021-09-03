@@ -1,6 +1,6 @@
 # hisat2ncbi
 
-## discription
+## Requirement
 
 ```
 pip install glob2
