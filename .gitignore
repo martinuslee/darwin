@@ -1,5 +1,9 @@
 *.fa
 *.ht2
+*.ht2l
 *.sa
 *.gz
 *.fastq
+*.sam
+*.log
+temp.py
