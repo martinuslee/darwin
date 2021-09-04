@@ -1,8 +1,6 @@
 # hisat2ENSEMBL
 
-## Copyright
-
-ABCLab Jongheon Lee :copyright:
+:copyright:ABCLab Jongheon Lee 
 
 ## Requirement
 
