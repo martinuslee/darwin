@@ -1,5 +1,12 @@
+####################################################################################
+#                                                                                  #
+#                                    HISAT2NCBI                                    #
+#                           implemented by Jongheon lee                            #
+#                     https://github.com/martinuslee/hisat2ncbi                    #
+#                                                                                  #
+####################################################################################
+
 import os
-import io
 import csv 
 
 # example path '4.HISAT2MAP/sampled10%/logs/'

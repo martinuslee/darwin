@@ -33,9 +33,9 @@ optional arguments:
 
 ```
 $ python3 hisat2map.py -t 4 --per sampled10% #example
-$ python3 hisat2map.py -h
+$ python3 hisat2map.py --help
 
-usage: hisat2map.py [-h] [-t THREAD] [-i INDEX_PATH] [-s SAMPLE_PATH] [--per SAMPLE_RATE] [--version]
+usage: hisat2map.py [-h] [-t THREAD] [-i INDEX_PATH] [-s SAMPLE_PATH] --per SAMPLE_RATE [--save] [--no-save] [--version]
 
 HISAT2 MAPPING NCBI ENTIRE SPECIES SCRIPT
 
@@ -48,5 +48,13 @@ optional arguments:
   -s SAMPLE_PATH, --sample SAMPLE_PATH
                         Directory path Sample files stored
   --per SAMPLE_RATE     Sample rate ( e.g. sampled10%, sampled5%, sampled05% )
+  --save                Mapping Rate Result CSV file save (Default : save)
+  --no-save             Mapping Rate Result CSV file do not save
   --version             show program's version number and exit
 ```
+
+## Mapping Rate CSV file Save
+
+- tidydata.py
+
+
