@@ -6,4 +6,6 @@
 *.fastq
 *.sam
 *.log
+*.csv
 temp.py
+test.py

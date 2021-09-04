@@ -22,8 +22,8 @@ parser = argparse.ArgumentParser(
 # argument enrollment
 parser.add_argument("-t", '--thread', dest='thread', type=str, default='1', action="store",
                     help='Launch NTHREADS parallel build threads')
-parser.add_argument("-p", '--path', dest='path', type=str, default='1.NCBI/', action="store",
-                    help='Directory path NCBI Refernce fasta files stored')
+parser.add_argument("-p", '--path', dest='path', type=str, default='1.ENSEMBL/', action="store",
+                    help='Directory path ENSEMBL Refernce fasta files stored')
 parser.add_argument("-o", '--outdIr', dest='outdir', type=str, default='2.HISAT2REF/', action="store",
                     help='HISAT2 Output Directory path')
 

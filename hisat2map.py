@@ -33,7 +33,7 @@ parser.add_argument('--per', dest='sample_rate', type=str, default='', action="s
 
 parser.add_argument('--save', dest='save', action='store_true', help="Mapping Rate Result CSV file save (Default : save)")
 parser.add_argument('--no-save', dest='save', action='store_false', help="Mapping Rate Result CSV file do not save")
-parser.set_defaults(feature=True)
+parser.set_defaults(save=True)
 
 parser.add_argument('--version', action='version', version='%(prog)s 1.0')
 args = parser.parse_args()
@@ -58,14 +58,12 @@ directory = sam_dir +'logs/'
 def getMapped(indexFile, f1, f2):
     # indexFile, f1, f2 = args_f  # ref : fasta, species : species name
     try:
-        # directory = '4.HISAT2MAP/' + args.sample_rate + '/logs/'
-        # sam_dir = '4.HISAT2MAP/' + args.sample_rate + '/'
-        
-        if not os.path.exists(directory):  # if there is not a directory..
+        if not os.path.exists(sam_dir):  # if there is not a directory..
             os.makedirs(directory)
+            os.makedirs(sam_dir + 'SAM/')
         basename = indexFile.split('/')[1]
         cmd = "time hisat2 -p " + args.thread + " --rna-strandness RF -x " + indexFile + \
-            " -1 " + f1 + " -2 " + f2 + " -S " + sam_dir + basename + ".sam 1> " + \
+            " -1 " + f1 + " -2 " + f2 + " -S " + sam_dir + 'SAM/' + basename + ".sam 1> " + \
             directory + basename + ".log 2>> " + directory + \
             basename + ".log"  # HISAT2 command line
         #os.system(cmd)  #### RUN!! ####
@@ -100,4 +98,8 @@ if __name__ == '__main__':
     # current time - start time  = sys time
     print("HISAT2 execution time :", time.time() - start)
 
-    if args.save: getMapRate(directory)
+    
+    if args.save: 
+        start = time.time()  # set timer to check execution time
+        getMapRate(sam_dir)
+        print("CSV execution time :", time.time() - start)

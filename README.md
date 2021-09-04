@@ -1,10 +1,39 @@
-# hisat2ncbi
+# hisat2ENSEMBL
 
 ## Requirement
 
 ```
 $ pip install glob2
 $ pip install figlet
+```
+
+## Structure
+
+```
+.
+├── 1.ENSEMBL # FASTA DATA FROM ENSEMBL
+│   ├── Acanthochromis_polyacanthus.ASM210954v1.dna.toplevel.fa
+│   ├── ...
+│   └── Zosterops_lateralis_melanops.ASM128173v1.dna.toplevel.fa
+├── 2.HISAT2REF # INDEX DIR
+│   ├── Acanthochromis_polyacanthus
+│   ├── ...
+│   └── Zosterops_lateralis_melanops
+├── 3.SAMPLE # SAMPLE DIR
+│   ├── sample_1.fastq
+│   └── sample_2.fastq
+├── 4.HISAT2MAP # MAP DIR
+│   ├── sampled01%
+│   ├── logs
+│   ├── results.csv
+│   └── SAM
+├── hisat2map.py # HISAT2 MAPPING
+├── hisat2ref.py # HISAT2 INDEX
+├── LICENSE
+├── preprocessing_fastq.ipynb # BIOPYTHON SAMPLING Fastq SAMPLE
+├── __pycache__
+├── README.md
+└── tidydata.py # To build CSV result file.
 ```
 
 ## Build Reference File 
