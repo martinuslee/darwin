@@ -13,6 +13,7 @@ from glob import glob
 from functools import partial
 import time
 from pyfiglet import Figlet
+from tidydata import getMapRate #custom function
 
 
 ####################################################################################
@@ -28,7 +29,12 @@ parser.add_argument("-i", '--index', dest='index_path', type=str, default='2.HIS
 parser.add_argument("-s", '--sample', dest='sample_path', type=str, default='3.SAMPLE/', action="store",
                     help='Directory path Sample files stored')
 parser.add_argument('--per', dest='sample_rate', type=str, default='', action="store",
-                    help='Sample rate ( e.g. sampled10%%, sampled5%%, sampled05%% )')
+                    help='Sample rate ( e.g. sampled10%%, sampled5%%, sampled05%% )', required=True)  # required option
+
+parser.add_argument('--save', dest='save', action='store_true', help="Mapping Rate Result CSV file save (Default : save)")
+parser.add_argument('--no-save', dest='save', action='store_false', help="Mapping Rate Result CSV file do not save")
+parser.set_defaults(feature=True)
+
 parser.add_argument('--version', action='version', version='%(prog)s 1.0')
 args = parser.parse_args()
 
@@ -42,16 +48,19 @@ print(f"- Thread : {args.thread}")
 print(f"- Index Path : {args.index_path}")
 print(f"- Sample Path : {args.sample_path}")
 print(f"- Sample % : {args.sample_rate}")
+print(f"- Save Result csv : {args.save}")
 print(f"---------------------------------------------------------------------------")
 
 ####################################################################################
-
-
+# global variables
+sam_dir = '4.HISAT2MAP/' + args.sample_rate + '/'
+directory = sam_dir +'logs/'
 def getMapped(indexFile, f1, f2):
     # indexFile, f1, f2 = args_f  # ref : fasta, species : species name
     try:
-        directory = '4.HISAT2MAP/' + args.sample_rate + '/logs/'
-        sam_dir = '4.HISAT2MAP/' + args.sample_rate + '/'
+        # directory = '4.HISAT2MAP/' + args.sample_rate + '/logs/'
+        # sam_dir = '4.HISAT2MAP/' + args.sample_rate + '/'
+        
         if not os.path.exists(directory):  # if there is not a directory..
             os.makedirs(directory)
         basename = indexFile.split('/')[1]
@@ -59,7 +68,7 @@ def getMapped(indexFile, f1, f2):
             " -1 " + f1 + " -2 " + f2 + " -S " + sam_dir + basename + ".sam 1> " + \
             directory + basename + ".log 2>> " + directory + \
             basename + ".log"  # HISAT2 command line
-        os.system(cmd)  #### RUN!! ####
+        #os.system(cmd)  #### RUN!! ####
         #print(cmd)  # test
     except OSError:
         print('Error: Creating directory. ' + directory)
@@ -75,18 +84,20 @@ def getMapped(indexFile, f1, f2):
 
 if __name__ == '__main__':
 
-    start = time.time()  # set timer to check execute time
+    start = time.time()  # set timer to check execution time
     pool = Pool(10)  # 10개씩 돌아감
     dirList = glob(args.index_path + '*/')  # get sub directories
     # get sub dir with basename of index files
     dirList = [path + path.split('/')[1] for path in dirList]
     dirList.sort()  # sort A-Z
 
-    fastq1, fastq2 = glob('3.SAMPLE/2.done/' + args.sample_rate + '*.fastq')
+    fastq1, fastq2 = glob('3.SAMPLE/' + args.sample_rate + '*.fastq')
 
     pool.starmap(getMapped, [[item, fastq1, fastq2] for item in dirList])
     pool.close()
     pool.join()
 
     # current time - start time  = sys time
-    print("time :", time.time() - start)
+    print("HISAT2 execution time :", time.time() - start)
+
+    if args.save: getMapRate(directory)
