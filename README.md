@@ -2,7 +2,7 @@
 
 ## Copyright
 
-:copyright:ABCLab Jongheon Lee
+ABCLab Jongheon Lee :copyright:
 
 ## Requirement
 
