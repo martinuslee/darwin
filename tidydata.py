@@ -1,8 +1,8 @@
 ####################################################################################
 #                                                                                  #
-#                                    HISAT2NCBI                                    #
+#                                    HISAT2ENSEMBL                                   #
 #                           implemented by Jongheon lee                            #
-#                     https://github.com/martinuslee/hisat2ncbi                    #
+#                     https://github.com/martinuslee/hisat2ENSEMBL                    #
 #                                                                                  #
 ####################################################################################
 

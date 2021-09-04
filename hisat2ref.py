@@ -1,8 +1,8 @@
 ####################################################################################
 #                                                                                  #
-#                                    HISAT2NCBI                                    #
+#                                    HISAT2ENSEMBL                                   #
 #                           implemented by Jongheon lee                            #
-#                     https://github.com/martinuslee/hisat2ncbi                    #
+#                     https://github.com/martinuslee/hisat2ENSEMBL                #
 #                                                                                  #
 ####################################################################################
 
@@ -17,7 +17,7 @@ from pyfiglet import Figlet
 
 # instance generate
 parser = argparse.ArgumentParser(
-    description='HISAT2 INDEXING NCBI ENTIRE SPECIES SCRIPT')
+    description='HISAT2 INDEXING ENSEMBL ENTIRE SPECIES SCRIPT')
 
 # argument enrollment
 parser.add_argument("-t", '--thread', dest='thread', type=str, default='1', action="store",

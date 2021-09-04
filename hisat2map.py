@@ -1,8 +1,8 @@
 ####################################################################################
 #                                                                                  #
-#                                    HISAT2NCBI                                    #
+#                                    HISAT2ENSEMBL                                   #
 #                           implemented by Jongheon lee                            #
-#                     https://github.com/martinuslee/hisat2ncbi                    #
+#                     https://github.com/martinuslee/hisat2ENSEMBL                   #
 #                                                                                  #
 ####################################################################################
 
@@ -19,7 +19,7 @@ from tidydata import getMapRate #custom function
 ####################################################################################
 # instance generate
 parser = argparse.ArgumentParser(
-    description='HISAT2 MAPPING NCBI ENTIRE SPECIES SCRIPT')
+    description='HISAT2 MAPPING ENSEMBL ENTIRE SPECIES SCRIPT')
 
 # argument enrollment
 parser.add_argument("-t", '--thread', dest='thread', type=str, default='1', action="store",
@@ -66,7 +66,7 @@ def getMapped(indexFile, f1, f2):
             " -1 " + f1 + " -2 " + f2 + " -S " + sam_dir + 'SAM/' + basename + ".sam 1> " + \
             directory + basename + ".log 2>> " + directory + \
             basename + ".log"  # HISAT2 command line
-        #os.system(cmd)  #### RUN!! ####
+        os.system(cmd)  #### RUN!! ####
         #print(cmd)  # test
     except OSError:
         print('Error: Creating directory. ' + directory)
