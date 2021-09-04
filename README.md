@@ -1,5 +1,9 @@
 # hisat2ENSEMBL
 
+## Copyright
+
+:copyright:ABCLab Jongheon Lee
+
 ## Requirement
 
 ```
@@ -42,16 +46,19 @@ $ pip install figlet
 
 ```
 $ python3 hisat2ref.py -t 4 -p 1.NCBI/ -o 2.HISAT2REF/
+```
+```
 $ python3 hisat2ref.py -h
+
 usage: hisat2ref.py [-h] [-t THREAD] [-p PATH] [-o OUTDIR]
 
-HISAT2 INDEXING NCBI ENTIRE SPECIES SCRIPT
+HISAT2 INDEXING ENSEMBL ENTIRE SPECIES SCRIPT
 
 optional arguments:
   -h, --help            show this help message and exit
   -t THREAD, --thread THREAD
                         Launch NTHREADS parallel build threads
-  -p PATH, --path PATH  Directory path NCBI Refernce fasta files stored
+  -p PATH, --path PATH  Directory path ENSEMBL Refernce fasta files stored
   -o OUTDIR, --outdIr OUTDIR
                         HISAT2 Output Directory path
 ```
@@ -62,11 +69,13 @@ optional arguments:
 
 ```
 $ python3 hisat2map.py -t 4 --per sampled10% #example
+```
+```
 $ python3 hisat2map.py --help
 
 usage: hisat2map.py [-h] [-t THREAD] [-i INDEX_PATH] [-s SAMPLE_PATH] --per SAMPLE_RATE [--save] [--no-save] [--version]
 
-HISAT2 MAPPING NCBI ENTIRE SPECIES SCRIPT
+HISAT2 MAPPING ENSEMBL ENTIRE SPECIES SCRIPT
 
 optional arguments:
   -h, --help            show this help message and exit
