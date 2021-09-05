@@ -1,3 +1,4 @@
+#! /usr/bin/env python3.8.10
 ####################################################################################
 #                                                                                  #
 #                                    HISAT2ENSEMBL                                   #
@@ -23,7 +24,7 @@ def getMapRate(path):
         with open(log, 'r') as f:
             for rate in f.readlines():
                  if "overall alignment rate" in rate:
-                     mapRate.append(rate.replace(" overall alignment rate\n",""))
+                     mapRate.append([log, rate.replace(" overall alignment rate\n","")])
 
 
     ### save csv
@@ -31,8 +32,9 @@ def getMapRate(path):
 
     with open(csv_file, 'w') as f:
         writer = csv.writer(f)
-        for val in mapRate:
-            writer.writerow([val])
+        for name, val in mapRate:
+            name = name.split('/')[3].split('.')[0]
+            writer.writerow([name, val])
 
 
-getMapRate('4.HISAT2MAP/sampled05%/')
+#getMapRate('4.HISAT2MAP/sampled05%/')
