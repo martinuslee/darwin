@@ -29,4 +29,4 @@ def sampling(path, origin1, origin2, per):
     SeqIO.write(sampleRecords, path+"sampled"+ per + "%_"+origin1, "fastq")
     SeqIO.write(sampleRecords_2, path+"sampled"+ per + "%_"+origin2, "fastq")
 
-sampling('3.SAMPLE/', 'SRR1758114_1.fastq','SRR1758114_2.fastq', 0.0001)
+sampling('3.SAMPLE/', 'SRR1758114_1.fastq','SRR1758114_2.fastq', 0.00005)

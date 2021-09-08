@@ -10,8 +10,6 @@
 import os
 import csv 
 
-# example path '4.HISAT2MAP/sampled05%/logs/'
-
 def getMapRate(path):
     log_dir = path + 'logs/' # dir path where map log files saved
     mapRate = []
@@ -37,3 +35,4 @@ def getMapRate(path):
             writer.writerow([name, val])
 
 
+getMapRate('4.HISAT2MAP/sampled1e-05%/')

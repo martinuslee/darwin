@@ -117,6 +117,6 @@ optional arguments:
 
 ## Mapping Rate CSV file Save
 
-- tidydata.py
+- tidydata.py # result.csv
 
 
