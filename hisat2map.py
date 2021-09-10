@@ -1,9 +1,9 @@
 #! /usr/bin/env python3.8.10
 ####################################################################################
 #                                                                                  #
-#                                    HISAT2ENSEMBL                                   #
+#                                    HISAT2ENSEMBL                                 #
 #                           implemented by Jongheon lee                            #
-#                     https://github.com/martinuslee/hisat2ENSEMBL                   #
+#                     https://github.com/martinuslee/hisat2ENSEMBL                 #
 #                                                                                  #
 ####################################################################################
 
