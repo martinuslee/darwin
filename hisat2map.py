@@ -67,6 +67,7 @@ def getMapped(indexFile, f1, f2):
             " -1 " + f1 + " -2 " + f2 + " -S " + sam_dir + 'SAM/' + basename + ".sam 1> " + \
             directory + basename + ".log 2>> " + directory + \
             basename + ".log"  # HISAT2 command line
+        
         os.system(cmd)  #### RUN!! ####
         #print(cmd)  # test
     except OSError:
@@ -84,22 +85,24 @@ def getMapped(indexFile, f1, f2):
 if __name__ == '__main__':
 
     start = time.time()  # set timer to check execution time
-    pool = Pool(10)  # 10개씩 돌아감
-    dirList = glob(args.index_path + '*/')  # get sub directories
-    # get sub dir with basename of index files
-    dirList = [path + path.split('/')[1] for path in dirList]
-    dirList.sort()  # sort A-Z
+    pool = Pool(30)  # Core 수에 맞게 돌아감
+    try:
+        dirList = glob(args.index_path + '*/')  # get sub directories
+        # get sub dir with basename of index files
+        dirList = [path + path.split('/')[1] for path in dirList]
+        dirList.sort()  # sort A-Z
 
-    fastq1, fastq2 = glob('3.SAMPLE/' + args.sample_rate + '*.fastq')
+        fastq1, fastq2 = glob('3.SAMPLE/' + args.sample_rate + '*.fastq')
+    except ValueError as e:
+        print(" Wrong sample percentage input check --per option \n", e) 
 
-    pool.starmap(getMapped, [[item, fastq1, fastq2] for item in dirList])
+    pool.starmap_async(getMapped, [[item, fastq1, fastq2] for item in dirList])
     pool.close()
     pool.join()
-
     # current time - start time  = sys time
     print("HISAT2 execution time :", time.time() - start)
 
-    
+
     if args.save: 
         start = time.time()  # set timer to check execution time
         getMapRate(sam_dir)

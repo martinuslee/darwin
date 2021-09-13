@@ -35,4 +35,3 @@ def getMapRate(path):
             writer.writerow([name, val])
 
 
-getMapRate('4.HISAT2MAP/sampled1e-05%/')
