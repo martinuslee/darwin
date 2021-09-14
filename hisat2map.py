@@ -10,6 +10,7 @@
 import os
 import argparse
 from multiprocessing import Pool
+import concurrent.futures
 from glob import glob
 from functools import partial
 import time
@@ -56,8 +57,8 @@ print(f"------------------------------------------------------------------------
 # global variables
 sam_dir = '4.HISAT2MAP/' + args.sample_rate + '/'
 directory = sam_dir +'logs/'
-def getMapped(indexFile, f1, f2):
-    # indexFile, f1, f2 = args_f  # ref : fasta, species : species name
+def getMapped(list):
+    indexFile, f1, f2 = list  # ref : fasta, species : species name
     try:
         if not os.path.exists(sam_dir):  # if there is not a directory..
             os.makedirs(directory)
@@ -72,7 +73,7 @@ def getMapped(indexFile, f1, f2):
         #print(cmd)  # test
     except OSError:
         print('Error: Creating directory. ' + directory)
-
+# 0:09.72elapsed
 
 ####################################################################################
 #
@@ -85,7 +86,7 @@ def getMapped(indexFile, f1, f2):
 if __name__ == '__main__':
 
     start = time.time()  # set timer to check execution time
-    pool = Pool(30)  # Core 수에 맞게 돌아감
+    #pool = Pool(30)  # Core 수에 맞게 돌아감
     try:
         dirList = glob(args.index_path + '*/')  # get sub directories
         # get sub dir with basename of index files
@@ -93,12 +94,15 @@ if __name__ == '__main__':
         dirList.sort()  # sort A-Z
 
         fastq1, fastq2 = glob('3.SAMPLE/' + args.sample_rate + '*.fastq')
+        
     except ValueError as e:
         print(" Wrong sample percentage input check --per option \n", e) 
 
-    pool.starmap_async(getMapped, [[item, fastq1, fastq2] for item in dirList])
-    pool.close()
-    pool.join()
+    with concurrent.futures.ProcessPoolExecutor() as executor:
+        executor.map(getMapped, [[item, fastq1, fastq2] for item in dirList])
+    #pool.starmap_async(getMapped, [[item, fastq1, fastq2] for item in dirList])
+    #pool.close()
+    #pool.join()
     # current time - start time  = sys time
     print("HISAT2 execution time :", time.time() - start)
 
