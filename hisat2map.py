@@ -98,7 +98,7 @@ if __name__ == '__main__':
     except ValueError as e:
         print(" Wrong sample percentage input check --per option \n", e) 
 
-    with concurrent.futures.ProcessPoolExecutor() as executor:
+    with concurrent.futures.ProcessPoolExecutor(max_workers=4) as executor:
         executor.map(getMapped, [[item, fastq1, fastq2] for item in dirList])
     #pool.starmap_async(getMapped, [[item, fastq1, fastq2] for item in dirList])
     #pool.close()
