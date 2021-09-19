@@ -9,7 +9,8 @@
 
 import os
 import argparse
-from multiprocessing import Pool
+import multiprocessing as mp
+import subprocess
 import concurrent.futures
 from glob import glob
 from functools import partial
@@ -30,6 +31,8 @@ parser.add_argument("-i", '--index', dest='index_path', type=str, default='2.HIS
                     help='Directory path HISAT2 index files stored')
 parser.add_argument("-s", '--sample', dest='sample_path', type=str, default='3.SAMPLE/', action="store",
                     help='Directory path Sample files stored')
+parser.add_argument('--name', dest='sample_name', type=str,action="store",
+                    help='Sample file name', required=True)
 parser.add_argument('--per', dest='sample_rate', type=str, default='', action="store",
                     help='Sample rate ( e.g. sampled10%%, sampled5%%, sampled05%% )', required=True)  # required option
 
@@ -55,7 +58,7 @@ print(f"------------------------------------------------------------------------
 
 ####################################################################################
 # global variables
-sam_dir = '4.HISAT2MAP/' + args.sample_rate + '/'
+sam_dir = '4.HISAT2MAP/' +args.sample_name + '/' + args.sample_rate + '/'
 directory = sam_dir +'logs/'
 def getMapped(list):
     indexFile, f1, f2 = list  # ref : fasta, species : species name
@@ -69,7 +72,7 @@ def getMapped(list):
             directory + basename + ".log 2>> " + directory + \
             basename + ".log"  # HISAT2 command line
         
-        os.system(cmd)  #### RUN!! ####
+        subprocess.call(cmd, shell=True)  #### RUN!! ####
         #print(cmd)  # test
     except OSError:
         print('Error: Creating directory. ' + directory)
@@ -92,13 +95,13 @@ if __name__ == '__main__':
         # get sub dir with basename of index files
         dirList = [path + path.split('/')[1] for path in dirList]
         dirList.sort()  # sort A-Z
-
-        fastq1, fastq2 = glob('3.SAMPLE/' + args.sample_rate + '*.fastq')
+        if(args.sample_path[-1]!='/'): args.sample_path += '/'
+        fastq1, fastq2 = glob(args.sample_path + args.sample_rate + '*.fastq')
         
     except ValueError as e:
         print(" Wrong sample percentage input check --per option \n", e) 
 
-    with concurrent.futures.ProcessPoolExecutor(max_workers=4) as executor:
+    with concurrent.futures.ProcessPoolExecutor(max_workers=5, mp_context=mp.get_context('fork')) as executor:
         executor.map(getMapped, [[item, fastq1, fastq2] for item in dirList])
     #pool.starmap_async(getMapped, [[item, fastq1, fastq2] for item in dirList])
     #pool.close()
