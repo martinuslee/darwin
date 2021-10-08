@@ -31,7 +31,6 @@ def getMapRate(path):
     with open(csv_file, 'w') as f:
         writer = csv.writer(f)
         for name, val in mapRate:
-            name = name.split('/')[3].split('.')[0]
+            name = os.path.basename(name).split('.')[0]
             writer.writerow([name, val])
-
 
