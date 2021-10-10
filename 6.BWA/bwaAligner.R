@@ -3,7 +3,7 @@ setRepositories(ind=1:7)
 library(tidyverse)
 library(doParallel)
 library(foreach)
-library(argparse)
+#library(argparse)
 
 setwd('/disk10/bijh/1.REF_Research/6.BWA/')
 #args = commandArgs(trailingOnly=TRUE)
@@ -21,10 +21,10 @@ sample_list <- list.files(
             full.names = TRUE
             )
 
-cl <- makeCluster(48)
+cl <- makeCluster(60)
 registerDoParallel(cl)
 
-innerLoop <- 10
+innerLoop <- 31
 outLoop <- length(file_list)/innerLoop
 parallelList <- vector(mode = "list", length = outLoop)
 index <- 1

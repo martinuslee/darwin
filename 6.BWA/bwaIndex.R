@@ -10,7 +10,7 @@ library(foreach)
 dir <- "/disk10/bijh/1.REF_Research/6.BWA/0.index/"
 file_list <- list.files(path=dir, pattern = "*fa$", full.names = TRUE)
 
-cl <- makeCluster(40)
+cl <- makeCluster(60)
 registerDoParallel(cl)
 
 innerLoop <- 10
@@ -31,3 +31,5 @@ system.time(for(i in 1:outLoop){
     system(parallelList[[i]][j])
   }
 })
+
+
