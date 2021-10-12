@@ -21,7 +21,7 @@ sample_list <- list.files(
             full.names = TRUE
             )
 
-cl <- makeCluster(60)
+cl <- makeCluster(62)
 registerDoParallel(cl)
 
 innerLoop <- 31
@@ -32,7 +32,7 @@ for( i in 1:outLoop){
   commends <- c()
   for( j in 1:innerLoop){
     commends <- append(commends, str_c(
-      "bwa mem ", file_list[index], " ",
+      "bwa mem -M -t 2 ", file_list[index], " ",
       sample_list[1], " ", sample_list[2], " > ./1.SAM/",
       SAM_list[index], ".sam"
       )

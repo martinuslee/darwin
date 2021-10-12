@@ -17,6 +17,7 @@ from functools import partial
 import time
 from pyfiglet import Figlet
 from tidydata import getMapRate #custom function
+from termcolor import colored
 
 
 ####################################################################################
@@ -45,7 +46,7 @@ args = parser.parse_args()
 
 f = Figlet(font='slant')
 #print(f.renderText('* * * * * * * * *'))
-print(f.renderText('\n    HISAT2\nEVERYTHING'))
+print(colored(f.renderText('    HISAT2\nEVERYTHING'), 'cyan'))
 #print(f.renderText('* * * * * * * * *'))
 
 print(f"---------------------------------------------------------------------------")
@@ -67,12 +68,12 @@ def getMapped(list):
             os.makedirs(directory)
             os.makedirs(sam_dir + 'SAM/')
         basename = indexFile.split('/')[1]
-        cmd = "time hisat2 -p " + args.thread + " --rna-strandness RF -x " + indexFile + \
+        cmd = "time hisat2 -p " + args.thread + " " + indexFile + \
             " -1 " + f1 + " -2 " + f2 + " -S " + sam_dir + 'SAM/' + basename + ".sam 1> " + \
             directory + basename + ".log 2>> " + directory + \
             basename + ".log"  # HISAT2 command line
-        
-        subprocess.call(cmd, shell=True)  #### RUN!! ####
+        #cmd = ["time", "hisat2", "-p", args.thread, indexFile, "-1", f1, +'-2', f2, "-S", sam_dir, "SAM/", basename, ".sam", "1>", directory, basename, ".log", "2>>", directory, basename, ".log"]
+        #subprocess.run(cmd, shell=True)  #### RUN!! ####
         #print(cmd)  # test
     except OSError:
         print('Error: Creating directory. ' + directory)
@@ -92,17 +93,19 @@ if __name__ == '__main__':
     #pool = Pool(30)  # Core 수에 맞게 돌아감
     try:
         dirList = glob(args.index_path + '*/')  # get sub directories
+        print(dirList)
         # get sub dir with basename of index files
         dirList = [path + path.split('/')[1] for path in dirList]
         dirList.sort()  # sort A-Z
         if(args.sample_path[-1]!='/'): args.sample_path += '/'
-        fastq1, fastq2 = glob(args.sample_path + args.sample_rate + '*.fastq')
-        
+        print(f'{args.sample_path}{args.sample_name}/{args.sample_rate}_*.fastq')
+        fastq1, fastq2 = sorted(glob(f'{args.sample_path}{args.sample_name}/{args.sample_rate}_*.fastq'))
+        print(fastq1,fastq2)
     except ValueError as e:
         print(" Wrong sample percentage input check --per option \n", e) 
 
-    with concurrent.futures.ProcessPoolExecutor(max_workers=5, mp_context=mp.get_context('fork')) as executor:
-        executor.map(getMapped, [[item, fastq1, fastq2] for item in dirList])
+    with concurrent.futures.ThreadPoolExecutor(max_workers=None) as executor:
+        executor.map(getMapped, [[locals, fastq1, fastq2] for item in dirList], chunksize=30000)
     #pool.starmap_async(getMapped, [[item, fastq1, fastq2] for item in dirList])
     #pool.close()
     #pool.join()

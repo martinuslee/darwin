@@ -67,7 +67,7 @@ def getMapped(list):
         #     " -1 " + f1 + " -2 " + f2 + " -S " + sam_dir + 'SAM/' + basename + ".sam 1> " + \
         #     directory + basename + ".log 2>> " + directory + \
         #     basename + ".log"  # HISAT2 command line
-        cmd = "time bwa mem " + indexFile + " " + f1 + " " + f2 + " > " + sam_dir + basename + ".sam" 
+        cmd = "time bwa mem -t " + args.thread  +  " " + indexFile + " " + f1 + " " + f2 + " > " + sam_dir + basename + ".sam" 
             # " " + directory + basename +".log 2>> " + directory + basename + ".log"
 
         subprocess.call(cmd, shell=True)  #### RUN!! ####
@@ -93,8 +93,8 @@ if __name__ == '__main__':
     except ValueError as e:
         print(" Wrong sample percentage input check --per option \n", e)
 
-    with concurrent.futures.ProcessPoolExecutor(max_workers=None, mp_context=mp.get_context('fork')) as executor:
-        executor.map(getMapped, [[item, fastq1, fastq2] for item in dirList],chunksize=5)
+    with concurrent.futures.ProcessPoolExecutor() as executor:
+        executor.map(getMapped, [[item, fastq1, fastq2] for item in dirList],chunksize=31)
     #pool.starmap_async(getMapped, [[item, fastq1, fastq2] for item in dirList])
     #pool.close()
     #pool.join()
