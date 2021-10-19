@@ -73,7 +73,7 @@ def getMapped(list):
             directory + basename + ".log 2>> " + directory + \
             basename + ".log"  # HISAT2 command line
         #cmd = ["time", "hisat2", "-p", args.thread, indexFile, "-1", f1, +'-2', f2, "-S", sam_dir, "SAM/", basename, ".sam", "1>", directory, basename, ".log", "2>>", directory, basename, ".log"]
-        #subprocess.run(cmd, shell=True)  #### RUN!! ####
+        subprocess.run(cmd, shell=True)  #### RUN!! ####
         #print(cmd)  # test
     except OSError:
         print('Error: Creating directory. ' + directory)
@@ -92,11 +92,13 @@ if __name__ == '__main__':
     start = time.time()  # set timer to check execution time
     #pool = Pool(30)  # Core 수에 맞게 돌아감
     try:
-        dirList = glob(args.index_path + '*/')  # get sub directories
-        print(dirList)
+        reference = ["Danio_rerio", "Sus_scrofa", "Gallus_gallus", "Mus_musculus", "Homo_sapiens","Chelydra_serpentina"]
+        dirList = [args.index_path + species for species in reference]
+        #dirList = glob(args.index_path + '*/')  # get sub directories
         # get sub dir with basename of index files
-        dirList = [path + path.split('/')[1] for path in dirList]
+        dirList = [path + "/" + path.split('/')[1] for path in dirList]
         dirList.sort()  # sort A-Z
+        print(dirList)
         if(args.sample_path[-1]!='/'): args.sample_path += '/'
         print(f'{args.sample_path}{args.sample_name}/{args.sample_rate}_*.fastq')
         fastq1, fastq2 = sorted(glob(f'{args.sample_path}{args.sample_name}/{args.sample_rate}_*.fastq'))
@@ -105,7 +107,7 @@ if __name__ == '__main__':
         print(" Wrong sample percentage input check --per option \n", e) 
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=None) as executor:
-        executor.map(getMapped, [[locals, fastq1, fastq2] for item in dirList], chunksize=30000)
+        executor.map(getMapped, [[item, fastq1, fastq2] for item in dirList], chunksize=30000)
     #pool.starmap_async(getMapped, [[item, fastq1, fastq2] for item in dirList])
     #pool.close()
     #pool.join()
