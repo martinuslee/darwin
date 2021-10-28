@@ -2,13 +2,11 @@ from Bio import SeqIO
 import random
 
 #len(identifiers)
-species = input() # Coturnix_japonica
+
 sample = input() # SRR1758114_1.fastq
 
-print(species, sample)
-
 #File Read
-records , records_2= list(SeqIO.parse(f"3.SAMPLE/{species}/{sample}","fastq")), list(SeqIO.parse(f"3.SAMPLE/{species}/{sample}","fastq"))
+records , records_2= list(SeqIO.parse(f"3.SAMPLE/{sample}","fastq")), list(SeqIO.parse(f"3.SAMPLE/{sample}","fastq"))
 
 index = list(range(1,len(records)+1))
 
