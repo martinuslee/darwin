@@ -7,7 +7,7 @@ sample = input() # SRR1758114_1.fastq
 
 #File Read
 records , records_2= list(SeqIO.parse(f"3.SAMPLE/{sample}","fastq")), list(SeqIO.parse(f"3.SAMPLE/{sample}","fastq"))
-
+#Coturnix_japonica/r50_SRR1758114_1.fastq
 index = list(range(1,len(records)+1))
 
 sampleIdx = sorted(random.sample(index, 10))
@@ -22,3 +22,4 @@ for i in sampleIdx:
 # File Write
 SeqIO.write(sampleRecords, f'3.SAMPLE/Coturnix_japonica/test_r10_SRR1758114_1.fastq', "fastq")
 SeqIO.write(sampleRecords_2, f'3.SAMPLE/Coturnix_japonica/test_r10_SRR1758114_2.fastq', "fastq")
+print("== Done ==")
