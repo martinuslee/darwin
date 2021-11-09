@@ -6,6 +6,7 @@ from Bio import SeqIO
 import random
 import os
 
+
 class MyWindow(QWidget):
     def __init__(self):
         super().__init__()
@@ -18,7 +19,7 @@ class MyWindow(QWidget):
         self.pushButton = QPushButton("Select First FASTQ Read File")
         self.pushButton2 = QPushButton("Select Second FASTQ Read File")
         self.runButton = QPushButton("Start")
-        
+
         self.pushButton.clicked.connect(self.pushButtonClicked)
         self.pushButton2.clicked.connect(self.pushButtonClicked2)
         self.runButton.clicked.connect(self.runReadWrite)
@@ -41,36 +42,41 @@ class MyWindow(QWidget):
         fname = QFileDialog.getOpenFileName(self)
         self.label.setText(fname[0])
         self.label_state.setText("Ready..!")
-        
+
     def pushButtonClicked2(self):
         fname = QFileDialog.getOpenFileName(self)
         self.label2.setText(fname[0])
-        self.label_state.setText("Ready..!")  
+        self.label_state.setText("Ready..!")
 
     def runReadWrite(self):
         try:
             self.label_state.setText("File Reading...")
-            
+
             # File Read
             fastq1 = self.label.text()
             fastq2 = self.label2.text()
-            
-            records, records_2 = list(SeqIO.parse(fastq1, "fastq")), list(
-                SeqIO.parse(fastq2, "fastq"))
-            index = list(range(1, len(records)+1))
-            
-            sampleIdx = list()
+            data = open(fastq1, 'rb')
 
+            data.seek(-2, os.SEEK_END)
+            while data.read(1) != b' ':
+                data.seek(-2, os.SEEK_CUR)
+            while data.read(1) != b'.':
+                data.seek(-2, os.SEEK_CUR)
+            length = int(data.readline().decode().split(' ')[0])
+            print(length)
+            index = list(range(1,length+1))
             sampleIdx = sorted(random.sample(index, 10))
 
-            print(sampleIdx)
+            record_dict, record2_dict= SeqIO.index(fastq1, "fastq"), SeqIO.index(fastq2, "fastq")
 
+            #print(sampleIdx)
+            sampleName = fastq1.split('_')[0]
             sampleRecords, sampleRecords_2 = [], []
-            print(os.path.dirname(fastq1) + "r10" + os.path.basename(fastq1))
+            for idx in sampleIdx:
+                sampleRecords.append(record_dict[f'{sampleName}.{idx}'])
+                sampleRecords_2.append(record2_dict[f'{sampleName}.{idx}'])
 
-            for i in sampleIdx:
-                sampleRecords.append(records[i])
-                sampleRecords_2.append(records_2[i])
+            print(os.path.dirname(fastq1) + "r10" + os.path.basename(fastq1))
             # File Write
 
             self.label_state.setText("File Writting...")
