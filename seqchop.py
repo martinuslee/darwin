@@ -17,26 +17,15 @@ class ThreadClass(QThread):
             # File Read
             fastq1 = self.parent.label.text()
             fastq2 = self.parent.label2.text()
-            data = open(fastq1, 'rb')
-
-            data.seek(-2, os.SEEK_END)
-            while data.read(1) != b' ':
-                data.seek(-2, os.SEEK_CUR)
-            while data.read(1) != b'.':
-                data.seek(-2, os.SEEK_CUR)
-            length = int(data.readline().decode().split(' ')[0])
-            print(length)
-            index = list(range(1,length+1))
-            sampleIdx = sorted(random.sample(index, 10))
 
             record_dict, record2_dict= SeqIO.index(fastq1, "fastq"), SeqIO.index(fastq2, "fastq")
 
-            #print(sampleIdx)
-            sampleName = os.path.basename(fastq1).split('_')[0]
             sampleRecords, sampleRecords_2 = [], []
-            for idx in sampleIdx:
-                sampleRecords.append(record_dict[f'{sampleName}.{idx}'])
-                sampleRecords_2.append(record2_dict[f'{sampleName}.{idx}'])
+            keys = random.sample(list(record_dict), 10)
+            keys = sorted(keys)
+            for k in keys:
+                sampleRecords.append(record_dict[k])
+                sampleRecords_2.append(record2_dict[k])
 
             print(os.path.dirname(fastq1) + "/r10" + os.path.basename(fastq1))
             # File Write

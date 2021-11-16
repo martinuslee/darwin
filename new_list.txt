@@ -1,0 +1,316 @@
+Acanthochromis polyacanthus
+Accipiter nisus
+Ailuropoda melanoleuca
+Amazona collaria
+Amphilophus citrinellus
+Amphiprion ocellaris
+Amphiprion percula
+Anabas testudineus
+Anas platyrhynchos
+Anas platyrhynchos platyrhynchos
+Anas zonorhyncha
+Anolis carolinensis
+Anser brachyrhynchus
+Anser cygnoides
+Aotus nancymaae
+Apteryx haastii
+Apteryx owenii
+Apteryx rowi
+Aquila chrysaetos chrysaetos
+Astatotilapia calliptera
+Astyanax mexicanus
+Astyanax mexicanus pachon
+Athene cunicularia
+Balaenoptera musculus
+Betta splendens
+Bison bison bison
+Bos grunniens
+Bos indicus hybrid
+Bos mutus
+Bos taurus
+Bos taurus hybrid
+Bubo bubo
+Buteo japonicus
+Caenorhabditis elegans
+Cairina moschata domestica
+Calidris pugnax
+Calidris pygmaea
+Callithrix jacchus
+Callorhinchus milii
+Camarhynchus parvulus
+Camelus dromedarius
+Canis lupus dingo
+Canis lupus familiarisbasenji
+Canis lupus familiaris
+Canis lupus familiarisgreatdane
+Capra hircus
+Capra hircus blackbengal
+Carassius auratus
+Carlito syrichta
+Castor canadensis
+Catagonus wagneri
+Catharus ustulatus
+Cavia aperea
+Cavia porcellus
+Cebus capucinus
+Cercocebus atys
+Cervus hanglu yarkandensis
+Chelonoidis abingdonii
+Chelydra serpentina
+Chinchilla lanigera
+Chlorocebus sabaeus
+Choloepus hoffmanni
+Chrysemys picta bellii
+Chrysolophus pictus
+Ciona intestinalis
+Ciona savignyi
+Clupea harengus
+Colobus angolensis palliatus
+Corvus moneduloides
+Cottoperca gobio
+Coturnix japonica
+Coturnix japonica
+Coturnix japonica
+Coturnix japonica
+Coturnix japonica
+Coturnix japonica
+Cricetulus griseus chok1gshd
+Cricetulus griseus crigri
+Cricetulus griseus picr
+Crocodylus porosus
+Cyanistes caeruleus
+Cyclopterus lumpus
+Cynoglossus semilaevis
+Cyprinodon variegatus
+Cyprinus carpio
+Cyprinus carpio german mirror
+Cyprinus carpio hebao red
+Cyprinus carpio huanghe
+Danio rerio
+Dasypus novemcinctus
+Delphinapterus leucas
+Denticeps clupeoides
+Dicentrarchus labrax
+Dipodomys ordii
+Dromaius novaehollandiae
+Drosophila melanogaster
+Echeneis naucrates
+Echinops telfairi
+Electrophorus electricus
+Eptatretus burgeri
+Equus asinus asinus
+Equus caballus
+Erinaceus europaeus
+Erpetoichthys calabaricus
+Erythrura gouldiae
+Esox lucius
+Falco tinnunculus
+Felis catus
+Ficedula albicollis
+Fukomys damarensis
+Fundulus heteroclitus
+Gadus morhua
+Gallus gallus
+Gambusia affinis
+Gasterosteus aculeatus
+Geospiza fortis
+Gopherus agassizii
+Gopherus evgoodei
+Gorilla gorilla
+Gouania willdenowi
+Haplochromis burtoni
+Heterocephalus glaber female
+Heterocephalus glaber male
+Hippocampus comes
+Homo sapiens
+Hucho hucho
+Ictalurus punctatus
+Ictidomys tridecemlineatus
+Jaculus jaculus
+Junco hyemalis
+Kryptolebias marmoratus
+Labrus bergylta
+Larimichthys crocea
+Lates calcarifer
+Laticauda laticaudata
+Latimeria chalumnae
+Lepidothrix coronata
+Lepisosteus oculatus
+Leptobrachium leishanense
+list
+Lonchura striata domestica
+Loxodonta africana
+Lynx canadensis
+Macaca fascicularis
+Macaca mulatta
+Macaca nemestrina
+Malurus cyaneus samueli
+Manacus vitellinus
+Mandrillus leucophaeus
+Marmota marmota marmota
+Mastacembelus armatus
+Maylandia zebra
+Meleagris gallopavo
+Melopsittacus undulatus
+Meriones unguiculatus
+Mesocricetus auratus
+Microcebus murinus
+Microtus ochrogaster
+Mola mola
+Monodelphis domestica
+Monodon monoceros
+Monopterus albus
+Moschus moschiferus
+Mus caroli
+Mus musculus 129s1svimj
+Mus musculus aj
+Mus musculus akrj
+Mus musculus balbcj
+Mus musculus c3hhej
+Mus musculus c57bl6nj
+Mus musculus casteij
+Mus musculus cbaj
+Mus musculus dba2j
+Mus musculus fvbnj
+Mus musculus
+Mus musculus lpj
+Mus musculus nodshiltj
+Mus musculus nzohlltj
+Mus musculus pwkphj
+Mus musculus wsbeij
+Mus pahari
+Mus spicilegus
+Mus spretus
+Mustela putorius furo
+Myotis lucifugus
+Myripristis murdjan
+Naja naja
+Nannospalax galili
+Neogobius melanostomus
+Neolamprologus brichardi
+Neovison vison
+Nomascus leucogenys
+Notamacropus eugenii
+Notechis scutatus
+Nothobranchius furzeri
+Nothoprocta perdicaria
+Numida meleagris
+Ochotona princeps
+Octodon degus
+Oncorhynchus kisutch
+Oncorhynchus mykiss
+Oncorhynchus tshawytscha
+Oreochromis aureus
+Oreochromis niloticus
+Ornithorhynchus anatinus
+Oryctolagus cuniculus
+Oryzias javanicus
+Oryzias latipes
+Oryzias latipes hni
+Oryzias latipes hsok
+Oryzias melastigma
+Oryzias sinensis
+Otolemur garnettii
+Otus sunia
+Ovis aries
+Ovis aries rambouillet
+Pan paniscus
+Panthera leo
+Panthera pardus
+Panthera tigris altaica
+Pan troglodytes
+Papio anubis
+Parambassis ranga
+Paramormyrops kingsleyae
+Parus major
+Pavo cristatus
+Pelodiscus sinensis
+Pelusios castaneus
+Periophthalmus magnuspinnatus
+Peromyscus maniculatus bairdii
+Petromyzon marinus
+Phascolarctos cinereus
+Phasianus colchicus
+Phocoena sinus
+Physeter catodon
+Piliocolobus tephrosceles
+Podarcis muralis
+Poecilia formosa
+Poecilia latipinna
+Poecilia mexicana
+Poecilia reticulata
+Pogona vitticeps
+Pongo abelii
+Procavia capensis
+Prolemur simus
+Propithecus coquereli
+Pseudonaja textilis
+Pteropus vampyrus
+Pundamilia nyererei
+Pygocentrus nattereri
+Rattus norvegicus
+Rhinolophus ferrumequinum
+Rhinopithecus bieti
+Rhinopithecus roxellana
+Saccharomyces cerevisiae
+Saimiri boliviensis boliviensis
+Salarias fasciatus
+Salmo salar
+Salmo trutta
+Salvator merianae
+Sander lucioperca
+Sarcophilus harrisii
+Sciurus vulgaris
+Scleropages formosus
+Scophthalmus maximus
+Serinus canaria
+Seriola dumerili
+Seriola lalandi dorsalis
+Sinocyclocheilus anshuiensis
+Sinocyclocheilus grahami
+Sinocyclocheilus rhinocerous
+Sorex araneus
+Sparus aurata
+Spermophilus dauricus
+Sphaeramia orbicularis
+Sphenodon punctatus
+Stachyris ruficeps
+Stegastes partitus
+Strigops habroptila
+Strix occidentalis caurina
+Struthio camelus australis
+Suricata suricatta
+Sus scrofa bamei
+Sus scrofa berkshire
+Sus scrofa hampshire
+Sus scrofa jinhua
+Sus scrofa landrace
+Sus scrofa largewhite
+Sus scrofa meishan
+Sus scrofa pietrain
+Sus scrofa rongchang
+Sus scrofa
+Sus scrofa tibetan
+Sus scrofa usmarc
+Sus scrofa wuzhishan
+Taeniopygia guttata
+Takifugu rubripes
+Terrapene carolina triunguis
+Tetraodon nigroviridis
+Theropithecus gelada
+Tupaia belangeri
+Tursiops truncatus
+Urocitellus parryii
+Ursus americanus
+Ursus maritimus
+Ursus thibetanus thibetanus
+Varanus komodoensis
+Vicugna pacos
+Vombatus ursinus
+Vulpes vulpes
+Xenopus tropicalis
+Xiphophorus couchianus
+Xiphophorus maculatus
+Zalophus californianus
+Zonotrichia albicollis
+Zosterops lateralis melanops

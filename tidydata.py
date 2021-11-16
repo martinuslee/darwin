@@ -22,7 +22,7 @@ def getMapRate(path):
         with open(log, 'r') as f:
             for rate in f.readlines():
                  if "overall alignment rate" in rate:
-                     mapRate.append([log, rate.replace(" overall alignment rate\n","")])
+                     mapRate.append([os.path.basename(log).split('.')[0], rate.replace(" overall alignment rate\n","")])
 
 
     ### save csv
@@ -30,7 +30,8 @@ def getMapRate(path):
 
     with open(csv_file, 'w') as f:
         writer = csv.writer(f)
+        writer.writerow(['species', 'mapping_rate'])
         for name, val in mapRate:
-            name = os.path.basename(name).split('.')[0]
+            #name = os.path.basename(name).split('.')[0]
             writer.writerow([name, val])
-
+    return mapRate
