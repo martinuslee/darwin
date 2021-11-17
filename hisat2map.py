@@ -8,6 +8,7 @@
 ####################################################################################
 
 import os
+import sys
 import argparse
 import multiprocessing as mp
 import subprocess
@@ -18,6 +19,7 @@ import time
 from pyfiglet import Figlet
 from tidydata import getMapRate  # custom function
 from termcolor import colored
+import taxonomy
 
 
 ####################################################################################
@@ -100,8 +102,10 @@ if __name__ == '__main__':
     real_start = start
     # pool = Pool(30)  # Core 수에 맞게 돌아감
 
-    reference = ["Danio_rerio", "Sus_scrofa", "Gallus_gallus",
-                 "Mus_musculus", "Homo_sapiens", "Chelydra_serpentina"]
+    # reference = ["Danio_rerio", "Sus_scrofa", "Gallus_gallus",
+    #              "Mus_musculus", "Homo_sapiens", "Chelydra_serpentina"]
+    
+    #taxonomy._reference
 
     def makeRefPath(ref_list):
         try:
@@ -121,7 +125,7 @@ if __name__ == '__main__':
         except ValueError as e:
             print(" Wrong sample percentage input check --per option \n", e)
 
-    dirList, fastq1, fastq2 = makeRefPath(reference)
+    dirList, fastq1, fastq2 = makeRefPath(taxonomy._reference)
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=None) as executor:
         executor.map(getMapped, [[item, fastq1, fastq2]
@@ -138,19 +142,53 @@ if __name__ == '__main__':
         print("CSV execution time :", time.time() - start)
 
     dicts = dict(filter(lambda x: x[1] > '0.00%', orderResult.items()))
-
+    print(dicts)
+    
     if not dicts:
-        dirList, fastq1, fastq2 = makeRefPath(order['Others'])
-        print('empty')
+        sys.exit('empty')
 
     else:
         max_species = max(orderResult, key=lambda x: orderResult[x])
+        print(max_species)
         print('not empty')
-        print(order[max_species])
-        dirList, fastq1, fastq2 = makeRefPath(order[max_species])
+        print(taxonomy._order[max_species])
+        dirList, fastq1, fastq2 = makeRefPath(taxonomy._order[max_species])
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=None) as executor:
-        executor.map(getMapped, [[item, fastq1, fastq2]
-                                 for item in dirList], chunksize=20000)
+        with concurrent.futures.ThreadPoolExecutor(max_workers=None) as executor:
+            executor.map(getMapped, [[item, fastq1, fastq2]
+                                    for item in dirList], chunksize=20000)
+
     print(" - HISAT2 execution time :", time.time() - real_start)
     getMapRate(sam_dir)
+
+    if args.save:
+        start = time.time()  # set timer to check execution time
+        orderResult = getMapRate(sam_dir)
+        orderResult = dict(orderResult)
+
+        print("CSV execution time :", time.time() - start)
+
+    dicts = dict(filter(lambda x: x[1] > '0.00%', orderResult.items()))
+    print(dicts)
+    
+    if not dicts:
+        #dirList, fastq1, fastq2 = makeRefPath(taxonomy._family['Others'])
+        sys.exit('empty')
+
+    else:
+        try:
+            max_species = max(orderResult, key=lambda x: orderResult[x])
+            print(max_species)
+            print('not empty')
+            print(taxonomy._family[max_species])
+            dirList, fastq1, fastq2 = makeRefPath(taxonomy._family[max_species])
+
+            with concurrent.futures.ThreadPoolExecutor(max_workers=None) as executor:
+                executor.map(getMapped, [[item, fastq1, fastq2]
+                                        for item in dirList], chunksize=20000)
+            print(" - HISAT2 execution time :", time.time() - real_start)
+            getMapRate(sam_dir)
+
+        except KeyError:
+            sys.exit("Doesn't match any family")
+
