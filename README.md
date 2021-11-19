@@ -92,7 +92,7 @@ optional arguments:
 - hisat2map.py
 
 ```
-$ python3 hisat2map.py -t 4 --per sampled10% #example
+$ python3 darwin.py -t 32 --name Homo_sapiens --per r10 #example
 ```
 ```
 $ python3 hisat2map.py --help
