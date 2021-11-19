@@ -50,7 +50,7 @@ args = parser.parse_args()
 
 f = Figlet(font='slant')
 #print(f.renderText('* * * * * * * * *'))
-print(colored(f.renderText('    HISAT2\nEVERYTHING'), 'cyan'))
+print(colored(f.renderText('    DARWIN'), 'cyan'))
 #print(f.renderText('* * * * * * * * *'))
 
 print(f"---------------------------------------------------------------------------")

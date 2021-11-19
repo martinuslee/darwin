@@ -22,7 +22,7 @@ def getMapRate(path):
         with open(log, 'r') as f:
             for rate in f.readlines():
                  if "overall alignment rate" in rate:
-                     mapRate.append([os.path.basename(log).split('.')[0], rate.replace(" overall alignment rate\n","")])
+                     mapRate.append([os.path.basename(log).split('.')[0], rate.replace("% overall alignment rate\n","")])
 
 
     ### save csv
