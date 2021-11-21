@@ -48,16 +48,18 @@ $ pip install figlet
 │   ├── ...
 │   └── Zosterops_lateralis_melanops
 ├── 3.SAMPLE # SAMPLE DIR
-│   ├── sample_1.fastq
-│   └── sample_2.fastq
+│   ├── r10_sample_1.fastq
+│   └── r10_sample_2.fastq
 ├── 4.HISAT2MAP # MAP DIR
-│   ├── sampled01%
 │   ├── logs
 │   ├── results.csv
 │   └── SAM
 ├── hisat2map.py # HISAT2 MAPPING
+├── darwin.py # HISAT2 MAPPING - main script
 ├── hisat2ref.py # HISAT2 INDEX
+├── taxonomy.py # TAXONOMY SPECIES INFO 
 ├── LICENSE
+├── seqchop.py # CLIENT S/W PyQt5
 ├── preprocessing_fastq.ipynb # BIOPYTHON SAMPLING Fastq SAMPLE
 ├── __pycache__
 ├── README.md
@@ -89,17 +91,17 @@ optional arguments:
 
 ## Sample file mapping
 
-- hisat2map.py
+- darwin.py
 
 ```
-$ python3 hisat2map.py -t 4 --per sampled10% #example
+$ python3 darwin.py -t 32 --name Ursus_americanus --per r10 #example
 ```
 ```
-$ python3 hisat2map.py --help
+$ python3 darwin.py -h
 
-usage: hisat2map.py [-h] [-t THREAD] [-i INDEX_PATH] [-s SAMPLE_PATH] --per SAMPLE_RATE [--save] [--no-save] [--version]
+usage: darwin.py [-h] [-t THREAD] [-i INDEX_PATH] [-s SAMPLE_PATH] --name SAMPLE_NAME --per SAMPLE_RATE [--save] [--no-save] [--version]
 
-HISAT2 MAPPING ENSEMBL ENTIRE SPECIES SCRIPT
+DARWIN : Data Alignment of RNA-seq for Web-based Interspecies Navigator - HISAT2 MAPPING ENSEMBL ENTIRE SPECIES SCRIPT
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -109,7 +111,8 @@ optional arguments:
                         Directory path HISAT2 index files stored
   -s SAMPLE_PATH, --sample SAMPLE_PATH
                         Directory path Sample files stored
-  --per SAMPLE_RATE     Sample rate ( e.g. sampled10%, sampled5%, sampled05% )
+  --name SAMPLE_NAME    Sample file name
+  --per SAMPLE_RATE     the number of reads ( e.g. r50, r10, r1 )
   --save                Mapping Rate Result CSV file save (Default : save)
   --no-save             Mapping Rate Result CSV file do not save
   --version             show program's version number and exit
@@ -120,4 +123,7 @@ optional arguments:
 - tidydata.py # result.csv
 
 ## Client S/W
+
+- seqchop.py
+
 

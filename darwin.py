@@ -25,7 +25,7 @@ import taxonomy
 ####################################################################################
 # instance generate
 parser = argparse.ArgumentParser(
-    description='HISAT2 MAPPING ENSEMBL ENTIRE SPECIES SCRIPT')
+    description='DARWIN : Data Alignment of RNA-seq for Web-based Interspecies Navigator - HISAT2 MAPPING ENSEMBL ENTIRE SPECIES SCRIPT')
 
 # argument enrollment
 parser.add_argument("-t", '--thread', dest='thread', type=str, default='1', action="store",
@@ -37,7 +37,7 @@ parser.add_argument("-s", '--sample', dest='sample_path', type=str, default='3.S
 parser.add_argument('--name', dest='sample_name', type=str, action="store",
                     help='Sample file name', required=True)
 parser.add_argument('--per', dest='sample_rate', type=str, default='', action="store",
-                    help='Sample rate ( e.g. sampled10%%, sampled5%%, sampled05%% )', required=True)  # required option
+                    help='the number of reads ( e.g. r50, r10, r1 )', required=True)  # required option
 
 parser.add_argument('--save', dest='save', action='store_true',
                     help="Mapping Rate Result CSV file save (Default : save)")
@@ -62,25 +62,12 @@ print(f"- Save Result csv : {args.save}")
 print(f"---------------------------------------------------------------------------")
 
 ####################################################################################
-# global variables
-# order = {
-#     'Chelydra_serpentina': ['Chelonoidis_abingdonii', 'Gopherus_agassizii', 'Salvator_merianae','Crocodylus_porosus','Laticauda_laticaudata','Pogona_vitticeps','Pelodiscus_sinensis','Chelydra_serpentina','Podarcis_muralis','Pseudonaja_textilis','Gopherus_evgoodei','Anolis_carolinensis','Naja_naja','Varanus_komodoensis','Notechis_scutatus','Chrysemys_picta_bellii','Terrapene_carolina_triunguis','Sphenodon_punctatus','Pelusios_castaneus'],
-#     'Carnivora': ['Vulpes_vulpes', 'Zalophus_californianus', 'Ailuropoda_melanoleuca', 'Suricata_suricatta'],
-#     'Danio_rerio': ['Acanthochromis_polyacanthus', 'Amphilophus_citrinellus', 'Amphiprion_ocellaris', 'Amphiprion_percula', 'Anabas_testudineus'],
-#     #'Sus_scrofa': ["Ursus_maritimus", "Vulpes_vulpes", "Ovis_aries_rambouillet"],
-#     'Gallus_gallus': ['Accipiter_nisus', 'Amazona_collaria', 'Anas_platyrhynchos', 'Coturnix_japonica','Taeniopygia_guttata', 'Struthio_camelus_australis', 'Zosterops_lateralis_melanops', 'Zonotrichia_albicollis'],
-#     #'Mus_musculus': ["Mus_spretus", "Marmota_marmota_marmota", "Castor_canadensis"],
-#     #'Homo_sapiens': ["Colobus_angolensis_palliatus", "Rhinopithecus_bieti", "Saimiri_boliviensis_boliviensis",'Pan_paniscus','Otolemur_garnettii','Cebus_capucinus','Pan_troglodytes','Propithecus_coquereli','Macaca_fascicularis','Mandrillus_leucophaeus','Theropithecus_gelada','Nomascus_leucogenys','Rhinopithecus_roxellana','Gorilla_gorilla','Prolemur_simus','Aotus_nancymaae','Macaca_mulatta','Callithrix_jacchus','Microcebus_murinus','Papio_anubis','Pongo_abelii','Macaca_nemestrina','Cercocebus_atys','Carlito_syrichta','Piliocolobus_tephrosceles','Chlorocebus_sabaeus'],
-#     'Homo_sapiens': ["Colobus_angolensis_palliatus", "Rhinopithecus_bieti"],
-#     #'Others': ['Latimeria chalumnae', 'Callorhinchus milii', 'Eptatretus burgeri', 'Petromyzon marinus', 'Ciona intestinalis', 'Ciona savignyi', 'Caenorhabditis elegans', 'Drosophila melanogaster', 'Saccharomyces cerevisiae','Vombatus_ursinus','Phascolarctos_cinereus','Monodelphis_domestica' ,'Ornithorhynchus_anatinus','Sarcophilus_harrisii','Notamacropus_eugenii']
-# }
 
 sam_dir = '4.HISAT2MAP/' + args.sample_name + '/' + args.sample_rate + '/'
 directory = sam_dir + 'logs/'
 if not os.path.exists(sam_dir):  # if there is not a directory..
     os.makedirs(directory)
     os.makedirs(sam_dir + 'SAM/')
-
 
 def getMapped(list):
     indexFile, f1, f2 = list  # ref : fasta, species : species name
@@ -105,14 +92,12 @@ if __name__ == '__main__':
     def makeRefPath(ref_list):
         try:
             dirList = [args.index_path + species for species in ref_list]
-            # dirList = glob(args.index_path + '*/')  # get sub directories
             # get sub dir with basename of index files
             dirList = [path + "/" + path.split('/')[1] for path in dirList]
             dirList.sort()  # sort A-Z
             # print(dirList)
             if(args.sample_path[-1] != '/'):
                 args.sample_path += '/'
-            # print(f'{args.sample_path}{args.sample_name}/{args.sample_rate}_*.fastq')
             fastq1, fastq2 = sorted(
                 glob(f'{args.sample_path}{args.sample_name}/{args.sample_rate}_*.fastq'))
             # print(fastq1,fastq2)
@@ -136,7 +121,7 @@ if __name__ == '__main__':
 
         print("CSV execution time :", time.time() - start)
 
-    dicts = dict(filter(lambda x: x[1] > '0.00%', orderResult.items()))
+    dicts = dict(filter(lambda x: x[1] > '0.00', orderResult.items()))
     print(dicts)
     
     if not dicts:
@@ -167,7 +152,6 @@ if __name__ == '__main__':
     print(dicts)
     
     if not dicts:
-        #dirList, fastq1, fastq2 = makeRefPath(taxonomy._family['Others'])
         sys.exit('empty')
 
     else:
