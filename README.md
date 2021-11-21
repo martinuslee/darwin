@@ -94,7 +94,7 @@ optional arguments:
 - darwin.py
 
 ```
-$ python3 darwin.py -t 32 --name Ursus_americanus --per r10 #example
+$ python3 darwin.py -t 32 --name Homo_sapiens --per r10 #example
 ```
 ```
 $ python3 darwin.py -h
