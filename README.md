@@ -1,4 +1,4 @@
-# hisat2ENSEMBL
+# DARWIN - Data Alignment of RNA-seq for Web-based Interspecies Navigator
 
 ```
              ____  ___    ____ _       _______   __
